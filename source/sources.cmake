@@ -1,6 +1,6 @@
 if(INCLUDE__STM32CUBEF2)
 
-	get_filename_component(_tmp_source_dir "${CMAKE_CURRENT_LIST_DIR}/${STM32CUBEF2__BASE_DIR}" ABSOLUTE)
+	get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}" ABSOLUTE)
     
     include_directories(${_tmp_source_dir}/Drivers/CMSIS/Include)
     include_directories(${_tmp_source_dir}/Drivers/CMSIS/Include)
