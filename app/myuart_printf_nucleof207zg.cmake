@@ -1,8 +1,6 @@
 set_cache(UBINOS__UBICLIB__USE_STDIO_RETARGETING                                FALSE   BOOL)
 set_cache(UBINOS__BSP__USE_DTTY                                                 FALSE   BOOL)
 
-set_cache(STM32CUBEF2__BOARD_NAME "STM32F2XX_NUCLEO_144" STRING)
-
 include(${PROJECT_UBINOS_DIR}/config/ubinos_nucleof207zg.cmake)
 
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
