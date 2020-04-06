@@ -6,6 +6,20 @@ set_cache_default(STM32CUBEF2__USE_HAL_DRIVER TRUE BOOL "Use STM32 Cube F2 HAL D
 
 set_cache_default(STM32CUBEF2__USE_FULL_LL_DRIVER FALSE BOOL "Use STM32 Cube F2 Full Low Level Driver")
 
+set_cache_default(STM32CUBEF2__USE_FREERTOS FALSE BOOL "Use STM32 Cube F2 FreeRTOS")
+
+set_cache_default(STM32CUBEF2__USE_LWIP FALSE BOOL "Use STM32 Cube F2 LwIP")
+
+set_cache_default(STM32CUBEF2__USE_LWIP_ETHERNET FALSE BOOL "Use STM32 F2 LwIP Ethernet Interface")
+
+set_cache_default(STM32CUBEF2__USE_LWIP_HTTP FALSE BOOL "Use STM32 Cube F2 HTTP Application Protocol")
+
+set_cache_default(STM32CUBEF2__USE_LCD FALSE BOOL "Use STM32 Cube F2 LCD")
+
+set_cache_default(STM32CUBEF2__USE_LCD_LOG FALSE BOOL "Use STM32 Cube F2 LCD Log")
+
+set_cache_default(STM32CUBEF2__USE_SRAM FALSE BOOL "Use STM32 Cube F2 SRAM")
+
 ####
 
 set(_tmp_all_flags "")
