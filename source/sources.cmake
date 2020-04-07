@@ -2,17 +2,17 @@ if(INCLUDE__STM32CUBEF2)
 
 	get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}" ABSOLUTE)
 
+	include_directories(${_tmp_source_dir}/Drivers/CMSIS/Include)
+	include_directories(${_tmp_source_dir}/Drivers/CMSIS/Device/ST/STM32F2xx/Include)
+	include_directories(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Inc)
+	include_directories(${_tmp_source_dir}/Drivers/BSP/Components)
+	include_directories(${_tmp_source_dir}/Drivers/BSP/Components/Common)
+	include_directories(${_tmp_source_dir}/Utilities)
+	include_directories(${_tmp_source_dir}/Utilities/Fonts)
+	include_directories(${_tmp_source_dir}/Utilities/Log)
+
 	if(STM32CUBEF2__USE_HAL_DRIVER)
 	
-		include_directories(${_tmp_source_dir}/Drivers/CMSIS/Include)
-		include_directories(${_tmp_source_dir}/Drivers/CMSIS/Device/ST/STM32F2xx/Include)
-		include_directories(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Inc)
-		include_directories(${_tmp_source_dir}/Drivers/BSP/Components)
-		include_directories(${_tmp_source_dir}/Drivers/BSP/Components/Common)
-		include_directories(${_tmp_source_dir}/Utilities)
-		include_directories(${_tmp_source_dir}/Utilities/Fonts)
-		include_directories(${_tmp_source_dir}/Utilities/Log)
-
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_adc.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_adc_ex.c)
@@ -22,8 +22,11 @@ if(INCLUDE__STM32CUBEF2)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_cryp.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dac.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dac_ex.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dcmi.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dma.c)
+		set_source_files_properties(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dma.c PROPERTIES COMPILE_FLAGS -O3)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dma_ex.c)
+		set_source_files_properties(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dma_ex.c PROPERTIES COMPILE_FLAGS -O3)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_eth.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_exti.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_flash.c)
@@ -39,6 +42,8 @@ if(INCLUDE__STM32CUBEF2)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rcc.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rcc_ex.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rng.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_sd.c)
+		set_source_files_properties(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_sd.c PROPERTIES COMPILE_FLAGS -O3)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_spi.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rtc.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rtc_ex.c)
@@ -50,6 +55,9 @@ if(INCLUDE__STM32CUBEF2)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_wwdg.c)
 		
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_fsmc.c)
+		set_source_files_properties(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_fsmc.c PROPERTIES COMPILE_FLAGS -O3)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_sdmmc.c)
+		set_source_files_properties(${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_sdmmc.c PROPERTIES COMPILE_FLAGS -O3)
 		
 		if(UBINOS__BSP__BOARD_MODEL STREQUAL "STM3221GEVAL")
 		
@@ -57,6 +65,11 @@ if(INCLUDE__STM32CUBEF2)
 			
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval.c)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_io.c)
+			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_lcd.c)
+			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_sd.c)
+			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_sram.c)
+			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_ts.c)
+			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_camera.c)
 			
 		elseif(UBINOS__BSP__BOARD_MODEL STREQUAL "NUCLEOF207ZG")
 		
@@ -158,6 +171,7 @@ if(INCLUDE__STM32CUBEF2)
 	
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/Components/ili9320/ili9320.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/Components/ili9325/ili9325.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/Components/ov2640/ov2640.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/Components/stmpe811/stmpe811.c)
 
 		if(UBINOS__BSP__BOARD_MODEL STREQUAL "STM3221GEVAL")
@@ -192,6 +206,18 @@ if(INCLUDE__STM32CUBEF2)
 		endif()
 		
 	endif(STM32CUBEF2__USE_SRAM)
+
+	if(STM32CUBEF2__USE_FATFS)
+		
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src)
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src/drivers)
+		
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src/diskio.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src/ff.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c)
+		
+	endif(STM32CUBEF2__USE_FATFS)
 
 endif(INCLUDE__STM32CUBEF2)
 

@@ -20,6 +20,8 @@ set_cache_default(STM32CUBEF2__USE_LCD_LOG FALSE BOOL "Use STM32 Cube F2 LCD Log
 
 set_cache_default(STM32CUBEF2__USE_SRAM FALSE BOOL "Use STM32 Cube F2 SRAM")
 
+set_cache_default(STM32CUBEF2__USE_FATFS FALSE BOOL "Use STM32 Cube F2 FatFs")
+
 ####
 
 set(_tmp_all_flags "")

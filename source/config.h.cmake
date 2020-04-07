@@ -23,5 +23,7 @@
 
 #cmakedefine01 STM32CUBEF2__USE_SRAM
 
+#cmakedefine01 STM32CUBEF2__USE_FATFS
+
 #endif /* (INCLUDE__STM32CUBEF2 == 1) */
 
