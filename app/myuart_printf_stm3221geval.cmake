@@ -24,3 +24,4 @@ get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}/Projects/STM322
 
 include_directories(${_tmp_source_dir}/Inc)
 
+
