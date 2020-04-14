@@ -67,7 +67,6 @@ if(INCLUDE__STM32CUBEF2)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_io.c)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_lcd.c)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_sd.c)
-			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_sram.c)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_ts.c)
 			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/BSP/STM322xG_EVAL/stm322xg_eval_camera.c)
 			
