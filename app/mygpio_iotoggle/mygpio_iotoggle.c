@@ -23,6 +23,35 @@ int appmain(int argc, char *argv[]) {
 	ubik_settickhookfunc(HAL_IncTick);
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+
+	/* -1- Enable GPIOG, GPIOC and GPIOI Clock (to be able to program the configuration registers) */
+	__HAL_RCC_GPIOG_CLK_ENABLE();
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+	__HAL_RCC_GPIOI_CLK_ENABLE();
+
+	/* -2- Configure PG.6, PG.8, PI.9 and PC.7 IOs in output push-pull mode to
+		 drive external LEDs */
+	GPIO_InitStruct.Pin = (GPIO_PIN_6 | GPIO_PIN_8);
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+
+	HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+	GPIO_InitStruct.Pin = GPIO_PIN_9;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+
+	HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
+
+	GPIO_InitStruct.Pin = GPIO_PIN_7;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
+
+	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
 #elif (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
 
 	/* -1- Enable GPIO Clock (to be able to program the configuration registers) */
@@ -108,12 +137,32 @@ static void task3func(void *arg) {
 	/* -3- Toggle IO in an infinite loop */
 	while (1)
 	{
+#if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+
+		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_6);
+		/* Insert delay 100 ms */
+		task_sleepms(100);
+		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_8);
+		/* Insert delay 100 ms */
+		task_sleepms(100);
+		HAL_GPIO_TogglePin(GPIOI, GPIO_PIN_9);
+		/* Insert delay 100 ms */
+		task_sleepms(100);
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7);
+		/* Insert delay 100 ms */
+		task_sleepms(100);
+
+#elif (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
+
 		HAL_GPIO_TogglePin(LED1_GPIO_PORT, LED1_PIN);
 		/* Insert delay 100 ms */
-		HAL_Delay(100);
+		task_sleepms(100);
 		HAL_GPIO_TogglePin(LED2_GPIO_PORT, LED2_PIN);
 		/* Insert delay 100 ms */
-		HAL_Delay(100);
+		task_sleepms(100);
+#else
+	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
+#endif
 	}
 }
 
