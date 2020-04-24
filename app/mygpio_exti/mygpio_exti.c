@@ -30,6 +30,7 @@ int appmain(int argc, char *argv[]) {
 	int r;
 
 	HAL_Init();
+	ubik_settickhookfunc(HAL_IncTick);
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 	BSP_LED_Init(LED1);
