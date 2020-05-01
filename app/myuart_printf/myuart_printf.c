@@ -43,7 +43,7 @@ int appmain(int argc, char *argv[]) {
 		Error_Handler();
 	}
 
-	printf("\n\r My UART Printf 2 Example: retarget the C library printf function to the UART\n\r");
+	printf("\n\r My UART Printf Example: retarget the C library printf function to the UART\n\r");
 
 	//
 	printf("\n\n\r\n");
@@ -100,6 +100,7 @@ static void task2func(void *arg) {
 		task_sleepms(delayms);
 	}
 }
+
 PUTCHAR_PROTOTYPE {
 	/* Place your implementation of fputc here */
 	/* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
