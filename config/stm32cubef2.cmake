@@ -1,6 +1,6 @@
 set(INCLUDE__STM32CUBEF2 TRUE)
 
-set_cache_default(STM32CUBEF2__BASE_DIR "${PROJECT_LIBRARY_DIR}/stm32cubef2_v01.09.00" STRING "stm32cubef2 project base dir")
+set_cache_default(STM32CUBEF2__BASE_DIR "${PROJECT_LIBRARY_DIR}/stm32cubef2_v01.09.00_lite" STRING "stm32cubef2 project base dir")
 
 set_cache_default(STM32CUBEF2__USE_HAL_DRIVER TRUE BOOL "Use STM32 Cube F2 HAL Driver")
 
