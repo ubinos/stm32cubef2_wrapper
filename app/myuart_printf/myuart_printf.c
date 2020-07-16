@@ -28,10 +28,16 @@
 UART_HandleTypeDef UartHandle;
 
 #ifdef __GNUC__
+
 /* With GCC Compilers, small printf (option LD Linker->Libraries->Small printf set to 'Yes') calls __io_putchar() */
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#define GETCHAR_PROTOTYPE int __io_getchar(void)
+
 #else
-	#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#define GETCHAR_PROTOTYPE int fgetc(FILE *f)
+
 #endif /* __GNUC__ */
 
 static void Error_Handler(void);
@@ -40,6 +46,7 @@ static void task2func(void *arg);
 
 int appmain(int argc, char *argv[]) {
 	int r;
+	char buf[128];
 
 	HAL_Init();
 	ubik_settickhookfunc(HAL_IncTick);
@@ -74,6 +81,11 @@ int appmain(int argc, char *argv[]) {
 		printf("\r\n");
 	}
 #endif /* (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1) */
+
+    printf("What is your name?\n\r\n\r");
+    scanf("%s", buf);
+    printf("\n\r");
+    printf("Hello %s.\n\r\n\r", buf);
 
 	srand(time(NULL));
 
@@ -122,6 +134,14 @@ PUTCHAR_PROTOTYPE {
 	HAL_UART_Transmit(&UartHandle, (uint8_t*) &ch, 1, 0xFFFF);
 
 	return ch;
+}
+
+GETCHAR_PROTOTYPE {
+    int ch;
+
+    HAL_UART_Receive(&UartHandle, (uint8_t*) &ch, 1, 0xFFFF);
+
+    return ch;
 }
 
 static void Error_Handler(void) {
