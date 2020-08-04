@@ -1,17 +1,17 @@
 /**
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 
 #include <ubinos.h>
 
@@ -41,15 +41,29 @@ UART_HandleTypeDef UartHandle;
 #endif /* __GNUC__ */
 
 static void Error_Handler(void);
+
+static void rootfunc(void *arg);
 static void task1func(void *arg);
 static void task2func(void *arg);
 
 int appmain(int argc, char *argv[]) {
 	int r;
+
+	r = task_create(NULL, rootfunc, NULL, task_getmiddlepriority(), 0, "root");
+	if (0 != r) {
+		logme("fail at task_create\r\n");
+	}
+
+	ubik_comp_start();
+
+	return 0;
+}
+
+static void rootfunc(void *arg) {
+	int r;
 	char buf[128];
 
 	HAL_Init();
-	ubik_settickhookfunc(HAL_IncTick);
 
 	UartHandle.Instance = USARTx;
 
@@ -67,25 +81,16 @@ int appmain(int argc, char *argv[]) {
 
 	printf("\n\r My UART Printf Example: retarget the C library printf function to the UART\n\r");
 
-	//
 	printf("\n\n\r\n");
 	printf("================================================================================\r\n");
 	printf("myuart_printf (build time: %s %s)\r\n", __TIME__, __DATE__);
 	printf("================================================================================\r\n");
 	printf("\r\n");
-#if (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1)
-	r = heap_printheapinfo(NULL);
-	if (0 == r) {
-		printf("\r\n");
-		printf("================================================================================\r\n");
-		printf("\r\n");
-	}
-#endif /* (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1) */
 
-    printf("What is your name?\n\r\n\r");
-    scanf("%s", buf);
-    printf("\n\r");
-    printf("Hello %s.\n\r\n\r", buf);
+	printf("What is your name?\n\r\n\r");
+	scanf("%s", buf);
+	printf("\n\r");
+	printf("Hello %s.\n\r\n\r", buf);
 
 	srand(time(NULL));
 
@@ -98,10 +103,6 @@ int appmain(int argc, char *argv[]) {
 	if (0 != r) {
 		logme("fail at task_create\r\n");
 	}
-
-	ubik_comp_start();
-
-	return 0;
 }
 
 static void task1func(void *arg) {
@@ -137,11 +138,11 @@ PUTCHAR_PROTOTYPE {
 }
 
 GETCHAR_PROTOTYPE {
-    int ch;
+	int ch;
 
-    HAL_UART_Receive(&UartHandle, (uint8_t*) &ch, 1, 0xFFFF);
+	HAL_UART_Receive(&UartHandle, (uint8_t*) &ch, 1, 0xFFFF);
 
-    return ch;
+	return ch;
 }
 
 static void Error_Handler(void) {
@@ -247,7 +248,6 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart) {
 	HAL_GPIO_DeInit(USARTx_TX_GPIO_PORT, USARTx_TX_PIN);
 	/* Configure UART Rx as alternate function  */
 	HAL_GPIO_DeInit(USARTx_RX_GPIO_PORT, USARTx_RX_PIN);
-
 }
 
 #endif /* (INCLUDE__APP__myuart_printf == 1) */

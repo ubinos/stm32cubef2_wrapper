@@ -1,17 +1,17 @@
 /**
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 
 #include <ubinos.h>
 
@@ -33,6 +33,7 @@ __IO uint16_t uhADCxConvertedValue = 0;
 
 static void Error_Handler(void);
 
+static void rootfunc(void *arg);
 static void task1func(void *arg);
 static void task2func(void *arg);
 static void task3func(void *arg);
@@ -40,50 +41,60 @@ static void task3func(void *arg);
 int appmain(int argc, char *argv[]) {
 	int r;
 
+	r = task_create(NULL, rootfunc, NULL, task_getmiddlepriority(), 0, "root");
+	if (0 != r) {
+		logme("fail at task_create\r\n");
+	}
+
+	ubik_comp_start();
+
+	return 0;
+}
+
+static void rootfunc(void *arg) {
+	int r;
+
 	ADC_ChannelConfTypeDef sConfig;
 
 	HAL_Init();
-	ubik_settickhookfunc(HAL_IncTick);
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
-	  /* Configure LED3 */
-	  BSP_LED_Init(LED3);
+	/* Configure LED3 */
+	BSP_LED_Init(LED3);
 
-	  /*##-1- Configure the ADC peripheral #######################################*/
-	  AdcHandle.Instance          = ADCx_INSTANCE;
+	/*##-1- Configure the ADC peripheral #######################################*/
+	AdcHandle.Instance = ADCx_INSTANCE;
 
-	  AdcHandle.Init.ClockPrescaler        = ADC_CLOCKPRESCALER_PCLK_DIV2;
-	  AdcHandle.Init.Resolution            = ADC_RESOLUTION_12B;
-	  AdcHandle.Init.ScanConvMode          = DISABLE;
-	  AdcHandle.Init.ContinuousConvMode    = DISABLE;
-	  AdcHandle.Init.DiscontinuousConvMode = DISABLE;
-	  AdcHandle.Init.NbrOfDiscConversion   = 0;
-	  AdcHandle.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_NONE;
-	  AdcHandle.Init.ExternalTrigConv      = ADC_EXTERNALTRIGCONV_T1_CC1;
-	  AdcHandle.Init.DataAlign             = ADC_DATAALIGN_RIGHT;
-	  AdcHandle.Init.NbrOfConversion       = 1;
-	  AdcHandle.Init.DMAContinuousRequests = DISABLE;
-	  AdcHandle.Init.EOCSelection          = DISABLE;
+	AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+	AdcHandle.Init.Resolution = ADC_RESOLUTION_12B;
+	AdcHandle.Init.ScanConvMode = DISABLE;
+	AdcHandle.Init.ContinuousConvMode = DISABLE;
+	AdcHandle.Init.DiscontinuousConvMode = DISABLE;
+	AdcHandle.Init.NbrOfDiscConversion = 0;
+	AdcHandle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+	AdcHandle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T1_CC1;
+	AdcHandle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	AdcHandle.Init.NbrOfConversion = 1;
+	AdcHandle.Init.DMAContinuousRequests = DISABLE;
+	AdcHandle.Init.EOCSelection = DISABLE;
 
-	  if(HAL_ADC_Init(&AdcHandle) != HAL_OK)
-	  {
-	    /* Initialization Error */
+	if (HAL_ADC_Init(&AdcHandle) != HAL_OK) {
+		/* Initialization Error */
 		logme("fail at HAL_ADC_Init\r\n");
-	    Error_Handler();
-	  }
+		Error_Handler();
+	}
 
-	  /*##-2- Configure ADC regular channel ######################################*/
-	  sConfig.Channel      = ADCx_CHANNEL;
-	  sConfig.Rank         = 1;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	  sConfig.Offset       = 0;
+	/*##-2- Configure ADC regular channel ######################################*/
+	sConfig.Channel = ADCx_CHANNEL;
+	sConfig.Rank = 1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+	sConfig.Offset = 0;
 
-	  if(HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK)
-	  {
-	    /* Channel Configuration Error */
+	if (HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK) {
+		/* Channel Configuration Error */
 		logme("fail at HAL_ADC_ConfigChannel\r\n");
-	    Error_Handler();
-	  }
+		Error_Handler();
+	}
 
 #elif (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
 	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
@@ -91,20 +102,11 @@ int appmain(int argc, char *argv[]) {
 	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
 #endif
 
-	//
 	printf("\n\n\r\n");
 	printf("================================================================================\r\n");
 	printf("myadc_regularconversion_polling (build time: %s %s)\r\n", __TIME__, __DATE__);
 	printf("================================================================================\r\n");
 	printf("\r\n");
-#if (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1)
-	r = heap_printheapinfo(NULL);
-	if (0 == r) {
-		printf("\r\n");
-		printf("================================================================================\r\n");
-		printf("\r\n");
-	}
-#endif /* (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1) */
 
 	srand(time(NULL));
 
@@ -122,10 +124,6 @@ int appmain(int argc, char *argv[]) {
 	if (0 != r) {
 		logme("fail at task_create\r\n");
 	}
-
-	ubik_comp_start();
-
-	return 0;
 }
 
 static void task1func(void *arg) {
@@ -157,8 +155,7 @@ static void task3func(void *arg) {
 
 	for (unsigned int i = 0;; i++) {
 		/*##-3- Start the conversion process #######################################*/
-		if(HAL_ADC_Start(&AdcHandle) != HAL_OK)
-		{
+		if (HAL_ADC_Start(&AdcHandle) != HAL_OK) {
 			/* Start Conversation Error */
 			logme("fail at HAL_ADC_Start\r\n");
 			Error_Handler();
@@ -166,16 +163,15 @@ static void task3func(void *arg) {
 
 		/*##-4- Wait for the end of conversion #####################################*/
 		/*  Before starting a new conversion, you need to check the current state of
-		the peripheral; if it�s busy you need to wait for the end of current
-		conversion before starting a new one.
-		For simplicity reasons, this example is just waiting till the end of the
-		conversion, but application may perform other tasks while conversion
-		operation is ongoing. */
+		 the peripheral; if it is busy you need to wait for the end of current
+		 conversion before starting a new one.
+		 For simplicity reasons, this example is just waiting till the end of the
+		 conversion, but application may perform other tasks while conversion
+		 operation is ongoing. */
 		HAL_ADC_PollForConversion(&AdcHandle, 10);
 
 		/* Check if the continuous conversion of regular channel is finished */
-		if((HAL_ADC_GetState(&AdcHandle) & HAL_ADC_STATE_EOC_REG) == HAL_ADC_STATE_EOC_REG)
-		{
+		if ((HAL_ADC_GetState(&AdcHandle) & HAL_ADC_STATE_EOC_REG) == HAL_ADC_STATE_EOC_REG) {
 			/*##-5- Get the converted value of regular channel #######################*/
 			uhADCxConvertedValue = HAL_ADC_GetValue(&AdcHandle);
 		}
@@ -188,63 +184,59 @@ static void task3func(void *arg) {
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
-static void Error_Handler(void)
-{
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
-  while(1)
-  {
-  }
+ * @brief  This function is executed in case of error occurrence.
+ * @param  None
+ * @retval None
+ */
+static void Error_Handler(void) {
+	/* Turn LED3 on */
+	BSP_LED_On(LED3);
+	while (1) {
+	}
 }
 
 /**
-  * @brief ADC MSP Initialization
-  *        This function configures the hardware resources used in this example:
-  *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration
-  * @param hadc: ADC handle pointer
-  * @retval None
-  */
-void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
-{
-  GPIO_InitTypeDef          GPIO_InitStruct;
+ * @brief ADC MSP Initialization
+ *        This function configures the hardware resources used in this example:
+ *           - Peripheral's clock enable
+ *           - Peripheral's GPIO Configuration
+ * @param hadc: ADC handle pointer
+ * @retval None
+ */
+void HAL_ADC_MspInit(ADC_HandleTypeDef *hadc) {
+	GPIO_InitTypeDef GPIO_InitStruct;
 
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  /* ADC3 Periph clock enable */
-  ADCx_CLOCK_ENABLE();
-  /* Enable GPIO clock ****************************************/
-  ADCx_CHANNEL_GPIO_CLOCK_ENABLE();
+	/*##-1- Enable peripherals and GPIO Clocks #################################*/
+	/* ADC3 Periph clock enable */
+	ADCx_CLOCK_ENABLE();
+	/* Enable GPIO clock ****************************************/
+	ADCx_CHANNEL_GPIO_CLOCK_ENABLE();
 
-  /*##-2- Configure peripheral GPIO ##########################################*/
-  /* ADC3 Channel8 GPIO pin configuration */
-  GPIO_InitStruct.Pin = ADCx_CHANNEL_PIN;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(ADCx_CHANNEL_GPIO_PORT, &GPIO_InitStruct);
+	/*##-2- Configure peripheral GPIO ##########################################*/
+	/* ADC3 Channel8 GPIO pin configuration */
+	GPIO_InitStruct.Pin = ADCx_CHANNEL_PIN;
+	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(ADCx_CHANNEL_GPIO_PORT, &GPIO_InitStruct);
 }
 
 /**
-  * @brief ADC MSP De-Initialization
-  *        This function frees the hardware resources used in this example:
-  *          - Disable the Peripheral's clock
-  *          - Revert GPIO to their default state
-  * @param hadc: ADC handle pointer
-  * @retval None
-  */
-void HAL_ADC_MspDeInit(ADC_HandleTypeDef *hadc)
-{
+ * @brief ADC MSP De-Initialization
+ *        This function frees the hardware resources used in this example:
+ *          - Disable the Peripheral's clock
+ *          - Revert GPIO to their default state
+ * @param hadc: ADC handle pointer
+ * @retval None
+ */
+void HAL_ADC_MspDeInit(ADC_HandleTypeDef *hadc) {
 
-  /*##-1- Reset peripherals ##################################################*/
-  ADCx_FORCE_RESET();
-  ADCx_RELEASE_RESET();
+	/*##-1- Reset peripherals ##################################################*/
+	ADCx_FORCE_RESET();
+	ADCx_RELEASE_RESET();
 
-  /*##-2- Disable peripherals and GPIO Clocks ################################*/
-  /* De-initialize the ADC3 Channel8 GPIO pin */
-  HAL_GPIO_DeInit(ADCx_CHANNEL_GPIO_PORT, ADCx_CHANNEL_PIN);
+	/*##-2- Disable peripherals and GPIO Clocks ################################*/
+	/* De-initialize the ADC3 Channel8 GPIO pin */
+	HAL_GPIO_DeInit(ADCx_CHANNEL_GPIO_PORT, ADCx_CHANNEL_PIN);
 }
 
 #elif (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)

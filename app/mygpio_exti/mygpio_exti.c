@@ -1,17 +1,17 @@
 /**
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 
 #include <ubinos.h>
 
@@ -38,14 +38,27 @@ static void EXTILine15_10_Config(void);
 	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
 #endif
 
+static void rootfunc(void *arg);
 static void task1func(void *arg);
 static void task2func(void *arg);
 
 int appmain(int argc, char *argv[]) {
 	int r;
 
+	r = task_create(NULL, rootfunc, NULL, task_getmiddlepriority(), 0, "root");
+	if (0 != r) {
+		logme("fail at task_create\r\n");
+	}
+
+	ubik_comp_start();
+
+	return 0;
+}
+
+static void rootfunc(void *arg) {
+	int r;
+
 	HAL_Init();
-	ubik_settickhookfunc(HAL_IncTick);
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 	BSP_LED_Init(LED1);
@@ -59,20 +72,11 @@ int appmain(int argc, char *argv[]) {
 	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
 #endif
 
-	//
 	printf("\n\n\r\n");
 	printf("================================================================================\r\n");
 	printf("mygpio_exti (build time: %s %s)\r\n", __TIME__, __DATE__);
 	printf("================================================================================\r\n");
 	printf("\r\n");
-#if (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1)
-	r = heap_printheapinfo(NULL);
-	if (0 == r) {
-		printf("\r\n");
-		printf("================================================================================\r\n");
-		printf("\r\n");
-	}
-#endif /* (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1) */
 
 	srand(time(NULL));
 
@@ -85,10 +89,6 @@ int appmain(int argc, char *argv[]) {
 	if (0 != r) {
 		logme("fail at task_create\r\n");
 	}
-
-	ubik_comp_start();
-
-	return 0;
 }
 
 static void task1func(void *arg) {

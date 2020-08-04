@@ -1,17 +1,17 @@
 /**
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 
 #include <ubinos.h>
 
@@ -25,8 +25,9 @@
 
 #include "main.h"
 
-static GPIO_InitTypeDef  GPIO_InitStruct;
+static GPIO_InitTypeDef GPIO_InitStruct;
 
+static void rootfunc(void *arg);
 static void task1func(void *arg);
 static void task2func(void *arg);
 static void task3func(void *arg);
@@ -34,8 +35,20 @@ static void task3func(void *arg);
 int appmain(int argc, char *argv[]) {
 	int r;
 
+	r = task_create(NULL, rootfunc, NULL, task_getmiddlepriority(), 0, "root");
+	if (0 != r) {
+		logme("fail at task_create\r\n");
+	}
+
+	ubik_comp_start();
+
+	return 0;
+}
+
+static void rootfunc(void *arg) {
+	int r;
+
 	HAL_Init();
-	ubik_settickhookfunc(HAL_IncTick);
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 
@@ -74,8 +87,8 @@ int appmain(int argc, char *argv[]) {
 	LED2_GPIO_CLK_ENABLE();
 
 	/* -2- Configure IO in output push-pull mode to drive external LEDs */
-	GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull  = GPIO_PULLUP;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 
 	GPIO_InitStruct.Pin = LED1_PIN;
@@ -87,20 +100,11 @@ int appmain(int argc, char *argv[]) {
 	#error "Unsupported UBINOS__BSP__BOARD_MODEL"
 #endif
 
-	//
 	printf("\n\n\r\n");
 	printf("================================================================================\r\n");
 	printf("mygpio_iotoggle (build time: %s %s)\r\n", __TIME__, __DATE__);
 	printf("================================================================================\r\n");
 	printf("\r\n");
-#if (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1)
-	r = heap_printheapinfo(NULL);
-	if (0 == r) {
-		printf("\r\n");
-		printf("================================================================================\r\n");
-		printf("\r\n");
-	}
-#endif /* (UBINOS__UBICLIB__USE_MALLOC_RETARGETING == 1) */
 
 	srand(time(NULL));
 
@@ -118,10 +122,6 @@ int appmain(int argc, char *argv[]) {
 	if (0 != r) {
 		logme("fail at task_create\r\n");
 	}
-
-	ubik_comp_start();
-
-	return 0;
 }
 
 static void task1func(void *arg) {
@@ -150,8 +150,7 @@ static void task2func(void *arg) {
 
 static void task3func(void *arg) {
 	/* -3- Toggle IO in an infinite loop */
-	while (1)
-	{
+	while (1) {
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 
 		HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_6);
