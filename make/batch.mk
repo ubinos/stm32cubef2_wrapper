@@ -45,6 +45,12 @@
 	make -f makefile.mk $@ CONFIG_NAME=myadc_regularconversion_polling_stm3221geval
 	@echo ""
 	@echo ""
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@echo ""
+	@echo ""
+	make -f makefile.mk $@ CONFIG_NAME=myadc_regularconversion_dma_stm3221geval
+	@echo ""
+	@echo ""
 	
 	
 	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
