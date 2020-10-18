@@ -92,7 +92,6 @@ __IO uint16_t uhADCxConvertedData_VrefInt_mVolt = 0; /* Value of internal voltag
 __IO int16_t hADCxConvertedData_Temperature_DegreeCelsius = 0; /* Value of temperature calculated from ADC conversion data (unit: degree Celcius) */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
 void Configure_DMA(void);
 void Configure_ADC(void);
 void Activate_ADC(void);

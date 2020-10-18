@@ -86,7 +86,6 @@ if(INCLUDE__STM32CUBEF2)
 	
 	if(STM32CUBEF2__USE_FULL_LL_DRIVER)
 	
-		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_rcc.c)
 		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_ll_utils.c)
 	
 	endif(STM32CUBEF2__USE_FULL_LL_DRIVER)
