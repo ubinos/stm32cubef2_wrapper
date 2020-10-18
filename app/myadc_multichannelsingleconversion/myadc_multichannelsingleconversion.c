@@ -742,7 +742,7 @@ void UserButton_Callback(void) {
 	} else {
 		/* Error: Previous action (ADC conversion or DMA transfer) not yet        */
 		/* completed.                                                             */
-		LED_Blinking(LED_BLINK_ERROR);
+		//LED_Blinking(LED_BLINK_ERROR);
 	}
 
 	/* Start ADC group regular conversion */
@@ -759,7 +759,7 @@ void UserButton_Callback(void) {
 		LL_ADC_REG_StartConversionSWStart(ADC1);
 	} else {
 		/* Error: ADC conversion start could not be performed */
-		LED_Blinking(LED_BLINK_ERROR);
+		//LED_Blinking(LED_BLINK_ERROR);
 	}
 }
 
