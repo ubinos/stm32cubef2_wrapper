@@ -121,6 +121,14 @@
 	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	@echo ""
 	@echo ""
+	make -f makefile.mk $@ CONFIG_NAME=myflash_eraseprogram_nucleof207zg
+	@echo ""
+	@echo ""
+	
+	
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@echo ""
+	@echo ""
 	make -f makefile.mk $@ CONFIG_NAME=mygpio_exti_nucleof207zg
 	@echo ""
 	@echo ""
