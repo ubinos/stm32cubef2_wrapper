@@ -218,6 +218,25 @@ if(INCLUDE__STM32CUBEF2)
 		
 	endif(STM32CUBEF2__USE_FATFS)
 
+	if(STM32CUBEF2__USE_FREERTOS)
+	
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3)
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source)
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS)
+		include_directories(${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/include)
+		
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/list.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/queue.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/tasks.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/timers.c)
+		
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c)
+		set(PROJECT_SOURCES ${PROJECT_SOURCES} ${_tmp_source_dir}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c)
+	
+	endif(STM32CUBEF2__USE_FREERTOS)
+
 	if(INCLUDE__UBINOS__UBIDRV)
 
 		if(UBINOS__UBIDRV__INCLUDE_NVMEM)

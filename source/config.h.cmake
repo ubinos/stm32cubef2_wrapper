@@ -25,5 +25,7 @@
 
 #cmakedefine01 STM32CUBEF2__USE_FATFS
 
+#cmakedefine01 STM32CUBEF2__USE_FREERTOS
+
 #endif /* (INCLUDE__STM32CUBEF2 == 1) */
 
