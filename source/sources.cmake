@@ -241,8 +241,6 @@ if(INCLUDE__STM32CUBEF2)
 
 		if(UBINOS__UBIDRV__INCLUDE_NVMEM)
 
-			set(PROJECT_SOURCES ${PROJECT_SOURCES} ${CMAKE_CURRENT_LIST_DIR}/../source/ubidrv/nvmem/arch/arm/cortexm/nucleof207zg/nvmem.c)
-
 		endif(UBINOS__UBIDRV__INCLUDE_NVMEM)
 
 	endif(INCLUDE__UBINOS__UBIDRV)
