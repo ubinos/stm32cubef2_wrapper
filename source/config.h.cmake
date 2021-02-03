@@ -27,7 +27,5 @@
 
 #cmakedefine01 STM32CUBEF2__USE_FREERTOS
 
-#cmakedefine01 STM32CUBEF2__DTTY_STM32_UART_ENABLE
-
 #endif /* (INCLUDE__STM32CUBEF2 == 1) */
 

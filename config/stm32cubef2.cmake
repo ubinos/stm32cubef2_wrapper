@@ -22,8 +22,6 @@ set_cache_default(STM32CUBEF2__USE_SRAM FALSE BOOL "Use STM32 Cube F2 SRAM")
 
 set_cache_default(STM32CUBEF2__USE_FATFS FALSE BOOL "Use STM32 Cube F2 FatFs")
 
-set_cache_default(STM32CUBEF2__DTTY_STM32_UART_ENABLE FALSE BOOL "")
-
 ####
 
 set(_tmp_all_flags "")
