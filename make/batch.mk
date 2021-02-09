@@ -195,7 +195,14 @@
 	make -f makefile.mk $@ CONFIG_NAME=ubik_tester_stm3221geval_rtctick
 	@echo ""
 	@echo ""
-	
+
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@echo ""
+	@echo ""
+	make -f makefile.mk $@ CONFIG_NAME=cli_tester_stm3221geval_rtctick
+	@echo ""
+	@echo ""
+
 	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	@echo ""
 	@echo ""
