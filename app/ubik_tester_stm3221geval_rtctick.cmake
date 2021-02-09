@@ -14,7 +14,7 @@ include(${PROJECT_UBINOS_DIR}/app/ubik_tester.cmake)
 
 ####
 
-get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}/Projects/STM322xG_EVAL/Examples/TIM/TIM_OCToggle/" ABSOLUTE)
+get_filename_component(_tmp_source_dir "${CMAKE_CURRENT_LIST_DIR}/ubik_tester/arch/arm/cortexm/stm3221geval" ABSOLUTE)
 
 include_directories(${_tmp_source_dir}/Inc)
 
