@@ -7,8 +7,7 @@
 #include <ubinos.h>
 
 #if (INCLUDE__APP__cli_tester == 1)
-
-#if (UBINOS__BSP__STM32_STM32XXXX == 1)
+#if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
 
 #include "main.h"
 
@@ -51,10 +50,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
-    bsp_abortsystem();
+    if (huart->Instance == DTTY_STM32_UART) {
+        dtty_stm32_uart_err_callback();
+    }
 }
 
-#endif /* (UBINOS__BSP__STM32_STM32XXXX == 1) */
-
+#endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG) */
 #endif /* (INCLUDE__APP__cli_tester == 1) */
 

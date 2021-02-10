@@ -32,9 +32,8 @@ extern "C"
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-void USARTx_DMA_RX_IRQHandler(void);
-void USARTx_DMA_TX_IRQHandler(void);
-void USARTx_IRQHandler(void);
+/* Interrupt Handler */
+void DTTY_STM32_UART_IRQHandler(void);
 
 #ifdef __cplusplus
 }

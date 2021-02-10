@@ -35,8 +35,7 @@
 #define DTTY_STM32_UART                         USART3
 #define DTTY_STM32_UART_HANDLE                  huart3
 
-#define DTTY_STM32_UART_DMA_CLK_ENABLE()        __HAL_RCC_DMA1_CLK_ENABLE()
-#define DTTY_STM32_UART_CLK_ENABLE()            __HAL_RCC_USART3_CLK_ENABLE();
+#define DTTY_STM32_UART_CLK_ENABLE()            __HAL_RCC_USART3_CLK_ENABLE()
 #define DTTY_STM32_UART_RX_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOC_CLK_ENABLE()
 #define DTTY_STM32_UART_TX_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOC_CLK_ENABLE()
 
@@ -51,26 +50,17 @@
 #define DTTY_STM32_UART_RX_GPIO_PORT            GPIOC
 #define DTTY_STM32_UART_RX_AF                   GPIO_AF7_USART3
 
-/* Definition for DTTY_STM32_UART's DMA */
-#define DTTY_STM32_UART_TX_DMA_CHANNEL          DMA_CHANNEL_4
-#define DTTY_STM32_UART_TX_DMA_STREAM           DMA1_Stream3
-#define DTTY_STM32_UART_RX_DMA_CHANNEL          DMA_CHANNEL_4
-#define DTTY_STM32_UART_RX_DMA_STREAM           DMA1_Stream1
-
 /* Definition for DTTY_STM32_UART's NVIC */
-#define DTTY_STM32_UART_DMA_TX_IRQn             DMA1_Stream3_IRQn
-#define DTTY_STM32_UART_DMA_RX_IRQn             DMA1_Stream1_IRQn
-#define DTTY_STM32_UART_DMA_TX_IRQHandler       DMA1_Stream3_IRQHandler
-#define DTTY_STM32_UART_DMA_RX_IRQHandler       DMA1_Stream1_IRQHandler
 #define DTTY_STM32_UART_IRQn                    USART3_IRQn
 #define DTTY_STM32_UART_IRQHandler              USART3_IRQHandler
 
-/* Definition for DTTY_STM32_UART */
+/* Definition for DTTY_STM32_UART Handle and Callback */
 
 extern UART_HandleTypeDef DTTY_STM32_UART_HANDLE;
 
 void dtty_stm32_uart_rx_callback(void);
 void dtty_stm32_uart_tx_callback(void);
+void dtty_stm32_uart_err_callback(void);
 
 #endif /* __MAIN_H */
 
