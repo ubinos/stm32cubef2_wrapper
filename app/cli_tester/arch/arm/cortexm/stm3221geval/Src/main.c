@@ -22,7 +22,8 @@ UART_HandleTypeDef DTTY_STM32_UART_HANDLE;
  */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-    if (huart->Instance == DTTY_STM32_UART) {
+    if (huart->Instance == DTTY_STM32_UART)
+    {
         dtty_stm32_uart_tx_callback();
     }
 }
@@ -36,7 +37,8 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    if (huart->Instance == DTTY_STM32_UART) {
+    if (huart->Instance == DTTY_STM32_UART)
+    {
         dtty_stm32_uart_rx_callback();
     }
 }
@@ -50,7 +52,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
-    if (huart->Instance == DTTY_STM32_UART) {
+    if (huart->Instance == DTTY_STM32_UART)
+    {
         dtty_stm32_uart_err_callback();
     }
 }

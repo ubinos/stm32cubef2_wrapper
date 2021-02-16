@@ -30,7 +30,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-/* Definition for DTTY_STM32_UART clock resources */
+/* Definition for DTTY_STM32_UART */
 
 #define DTTY_STM32_UART                         USART3
 #define DTTY_STM32_UART_HANDLE                  huart3
@@ -42,19 +42,15 @@
 #define DTTY_STM32_UART_FORCE_RESET()           __HAL_RCC_USART3_FORCE_RESET()
 #define DTTY_STM32_UART_RELEASE_RESET()         __HAL_RCC_USART3_RELEASE_RESET()
 
-/* Definition for DTTY_STM32_UART Pins */
-#define DTTY_STM32_UART_TX_PIN                  GPIO_PIN_8
-#define DTTY_STM32_UART_TX_GPIO_PORT            GPIOD
+#define DTTY_STM32_UART_TX_Pin                  GPIO_PIN_8
+#define DTTY_STM32_UART_TX_GPIO_Port            GPIOD
 #define DTTY_STM32_UART_TX_AF                   GPIO_AF7_USART3
-#define DTTY_STM32_UART_RX_PIN                  GPIO_PIN_9
-#define DTTY_STM32_UART_RX_GPIO_PORT            GPIOD
+#define DTTY_STM32_UART_RX_Pin                  GPIO_PIN_9
+#define DTTY_STM32_UART_RX_GPIO_Port            GPIOD
 #define DTTY_STM32_UART_RX_AF                   GPIO_AF7_USART3
 
-/* Definition for DTTY_STM32_UART's NVIC */
 #define DTTY_STM32_UART_IRQn                    USART3_IRQn
 #define DTTY_STM32_UART_IRQHandler              USART3_IRQHandler
-
-/* Definition for DTTY_STM32_UART Handle and Callback */
 
 extern UART_HandleTypeDef DTTY_STM32_UART_HANDLE;
 

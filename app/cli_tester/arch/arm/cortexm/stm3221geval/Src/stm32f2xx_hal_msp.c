@@ -28,19 +28,19 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
     /*##-2- Configure peripheral GPIO ##########################################*/
     /* UART TX GPIO pin configuration  */
-    GPIO_InitStruct.Pin = DTTY_STM32_UART_TX_PIN;
+    GPIO_InitStruct.Pin = DTTY_STM32_UART_TX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
     GPIO_InitStruct.Alternate = DTTY_STM32_UART_TX_AF;
 
-    HAL_GPIO_Init(DTTY_STM32_UART_TX_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_Init(DTTY_STM32_UART_TX_GPIO_Port, &GPIO_InitStruct);
 
     /* UART RX GPIO pin configuration  */
-    GPIO_InitStruct.Pin = DTTY_STM32_UART_RX_PIN;
+    GPIO_InitStruct.Pin = DTTY_STM32_UART_RX_Pin;
     GPIO_InitStruct.Alternate = DTTY_STM32_UART_RX_AF;
 
-    HAL_GPIO_Init(DTTY_STM32_UART_RX_GPIO_PORT, &GPIO_InitStruct);
+    HAL_GPIO_Init(DTTY_STM32_UART_RX_GPIO_Port, &GPIO_InitStruct);
 
     /* NVIC configuration for USART TC interrupt */
     HAL_NVIC_SetPriority(DTTY_STM32_UART_IRQn, NVIC_PRIO_MIDDLE, 0);
@@ -63,11 +63,11 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
 
     /*##-2- Disable peripherals and GPIO Clocks #################################*/
     /* Configure UART Tx as alternate function  */
-    HAL_GPIO_DeInit(DTTY_STM32_UART_TX_GPIO_PORT, DTTY_STM32_UART_TX_PIN);
+    HAL_GPIO_DeInit(DTTY_STM32_UART_TX_GPIO_Port, DTTY_STM32_UART_TX_Pin);
     /* Configure UART Rx as alternate function  */
-    HAL_GPIO_DeInit(DTTY_STM32_UART_RX_GPIO_PORT, DTTY_STM32_UART_RX_PIN);
+    HAL_GPIO_DeInit(DTTY_STM32_UART_RX_GPIO_Port, DTTY_STM32_UART_RX_Pin);
 
-    /*##-5- Disable the NVIC for USART TC ###########################################*/
+    /*##-3- Disable the NVIC for USART TC ###########################################*/
     HAL_NVIC_DisableIRQ(DTTY_STM32_UART_IRQn);
 }
 
