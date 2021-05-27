@@ -3,6 +3,8 @@
 #if (INCLUDE__APP__cli_tester == 1)
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
 
+#include <ubinos/bsp/arch.h>
+
 #include "main.h"
 
 /**
