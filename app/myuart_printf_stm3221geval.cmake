@@ -1,3 +1,5 @@
+set_cache(UBINOS__UBIK__TICK_TYPE "RTC" STRING)
+
 set_cache(UBINOS__UBICLIB__USE_STDIO_RETARGETING                                FALSE   BOOL)
 set_cache(UBINOS__BSP__USE_DTTY                                                 FALSE   BOOL)
 
@@ -20,8 +22,5 @@ file(GLOB_RECURSE _tmp_sources
 
 set(PROJECT_APP_SOURCES ${PROJECT_APP_SOURCES} ${_tmp_sources})
 
-get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}/Projects/STM322xG_EVAL/Examples/UART/UART_Printf" ABSOLUTE)
-
-include_directories(${_tmp_source_dir}/Inc)
-
+include_directories(${_tmp_source_dir}/arch/arm/cortexm/stm3221geval/Inc)
 

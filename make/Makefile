@@ -1,4 +1,4 @@
 CONFIG_DIR ?= ../app
-CONFIG_NAME ?= myuart_printf_stm3221geval
+CONFIG_NAME ?= cli_tester_nucleof207zg_rtctick
 
 include makefile.mk

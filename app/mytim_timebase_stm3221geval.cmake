@@ -1,3 +1,5 @@
+set_cache(UBINOS__UBIK__TICK_TYPE "RTC" STRING)
+
 include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval.cmake)
 
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
@@ -17,8 +19,5 @@ file(GLOB_RECURSE _tmp_sources
 
 set(PROJECT_APP_SOURCES ${PROJECT_APP_SOURCES} ${_tmp_sources})
 
-get_filename_component(_tmp_source_dir "${STM32CUBEF2__BASE_DIR}/Projects/STM322xG_EVAL/Examples/TIM/TIM_TimeBase/" ABSOLUTE)
-
-include_directories(${_tmp_source_dir}/Inc)
-
+include_directories(${_tmp_source_dir}/arch/arm/cortexm/stm3221geval/Inc)
 

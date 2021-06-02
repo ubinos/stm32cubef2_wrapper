@@ -27,6 +27,9 @@ set_cache_default(STM32CUBEF2__USE_FATFS FALSE BOOL "Use STM32 Cube F2 FatFs")
 set(_tmp_all_flags "")
 
 if(STM32CUBEF2__USE_HAL_DRIVER)
+    if(UBINOS__UBIK__TICK_TYPE STREQUAL "SYSTICK")
+        message(FATAL_ERROR "Can not support STM32CUBEF2__USE_HAL_DRIVER with  SYSTICK UBINOS__UBIK__TICK_TYPE")
+    endif()
     set(_tmp_all_flags "${_tmp_all_flags} -DUSE_HAL_DRIVER")
 endif()
 
