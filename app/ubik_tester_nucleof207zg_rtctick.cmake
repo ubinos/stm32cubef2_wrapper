@@ -4,6 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# {ubinos_config_type: [buildable, cmake, app]}
+
 set_cache(UBINOS__UBIK__TICK_TYPE "RTC" STRING)
 
 include(${PROJECT_UBINOS_DIR}/config/ubinos_nucleof207zg.cmake)

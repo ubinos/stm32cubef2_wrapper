@@ -1,3 +1,11 @@
+#
+# Copyright (c) 2019 Sung Ho Park and CSOS
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# {ubinos_config_type: [buildable, cmake, app]}
+
 set_cache(STM32CUBEF2__USE_HAL_DRIVER FALSE BOOL)
 set_cache(STM32CUBEF2__USE_FULL_LL_DRIVER TRUE BOOL)
 
