@@ -9,7 +9,7 @@
 set_cache(UBINOS__UBICLIB__USE_STDIO_RETARGETING FALSE BOOL)
 set_cache(UBINOS__BSP__USE_DTTY FALSE BOOL)
 
-include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval_baremetal.cmake)
+include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval_baremetal_trace.cmake)
 
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
 
