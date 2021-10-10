@@ -1,6 +1,5 @@
 #include <ubinos.h>
 
-#if (INCLUDE__APP__cli_tester == 1)
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
 
 #include "main.h"
@@ -17,5 +16,4 @@ void DTTY_STM32_UART_IRQHandler(void)
 }
 
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG) */
-#endif /* (INCLUDE__APP__cli_tester == 1) */
 
