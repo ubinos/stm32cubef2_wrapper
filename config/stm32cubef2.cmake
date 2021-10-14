@@ -1,4 +1,5 @@
 set(INCLUDE__STM32CUBEF2 TRUE)
+set(PROJECT_UBINOS_LIBRARIES ${PROJECT_UBINOS_LIBRARIES} stm32cubef2_wrapper)
 
 set_cache_default(STM32CUBEF2__BASE_DIR "${PROJECT_LIBRARY_DIR}/stm32cubef2_v01.09.00_lite" STRING "stm32cubef2 project base dir")
 
