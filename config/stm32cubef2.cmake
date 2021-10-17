@@ -5,7 +5,7 @@ set_cache_default(STM32CUBEF2__BASE_DIR "${PROJECT_LIBRARY_DIR}/stm32cubef2_v01.
 
 set_cache_default(STM32CUBEF2__USE_HAL_DRIVER TRUE BOOL "Use STM32 Cube F2 HAL Driver")
 
-set_cache_default(STM32CUBEF2__USE_HAL_WITH_UBINOS_TICK FALSE BOOL "Use STM32 Cube F2 HAL Driver with ubinos tick ")
+set_cache_default(STM32CUBEF2__USE_HAL_WITH_UBINOS_TICK TRUE BOOL "Use STM32 Cube F2 HAL Driver with ubinos tick ")
 
 set_cache_default(STM32CUBEF2__USE_FULL_LL_DRIVER FALSE BOOL "Use STM32 Cube F2 Full Low Level Driver")
 
