@@ -118,13 +118,13 @@
 	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	@echo ""
 	@echo ""
-	make -f makefile.mk $@ CONFIG_NAME=helloworld_mt_nucleof207zg_rtctick
+	make -f makefile.mk $@ CONFIG_NAME=hello_world_nucleof207zg_rtctick
 	@echo ""
 	@echo ""
 	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	@echo ""
 	@echo ""
-	make -f makefile.mk $@ CONFIG_NAME=helloworld_mt_stm3221geval_rtctick
+	make -f makefile.mk $@ CONFIG_NAME=hello_world_stm3221geval_rtctick
 	@echo ""
 	@echo ""
 

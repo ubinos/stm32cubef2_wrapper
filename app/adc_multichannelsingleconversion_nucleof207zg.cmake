@@ -6,15 +6,17 @@
 
 # ubinos_config_info {"name_base": "adc_multichannelsingleconversion", "build_type": "cmake_ubinos", "app": true}
 
-set(INCLUDE__APP TRUE)
-set(APP__NAME "adc_multichannelsingleconversion")
-
 set_cache(STM32CUBEF2__USE_HAL_DRIVER FALSE BOOL)
 set_cache(STM32CUBEF2__USE_FULL_LL_DRIVER TRUE BOOL)
 
 include(${PROJECT_UBINOS_DIR}/config/ubinos_nucleof207zg.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_extension/config/stm32cubef2_extension.cmake)
+
+####
+
+set(INCLUDE__APP TRUE)
+set(APP__NAME "adc_multichannelsingleconversion")
 
 get_filename_component(_tmp_source_dir "${CMAKE_CURRENT_LIST_DIR}/${APP__NAME}" ABSOLUTE)
 string(TOLOWER ${UBINOS__BSP__BOARD_MODEL} _temp_board_model)

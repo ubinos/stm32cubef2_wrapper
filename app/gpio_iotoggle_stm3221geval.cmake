@@ -6,14 +6,16 @@
 
 # ubinos_config_info {"name_base": "gpio_iotoggle", "build_type": "cmake_ubinos", "app": true}
 
-set(INCLUDE__APP TRUE)
-set(APP__NAME "gpio_iotoggle")
-
 set_cache(UBINOS__UBIK__TICK_TYPE "RTC" STRING)
 
 include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_extension/config/stm32cubef2_extension.cmake)
+
+####
+
+set(INCLUDE__APP TRUE)
+set(APP__NAME "gpio_iotoggle")
 
 get_filename_component(_tmp_source_dir "${CMAKE_CURRENT_LIST_DIR}/${APP__NAME}" ABSOLUTE)
 string(TOLOWER ${UBINOS__BSP__BOARD_MODEL} _temp_board_model)

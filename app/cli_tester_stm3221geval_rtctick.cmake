@@ -6,9 +6,6 @@
 
 # ubinos_config_info {"name_base": "cli_tester", "build_type": "cmake_ubinos", "app": true}
 
-set(INCLUDE__APP TRUE)
-set(APP__NAME "cli_tester")
-
 set_cache(UBINOS__UBICLIB__EXCLUDE_CLI FALSE BOOL)
 
 set_cache(UBINOS__UBIK__TICK_TYPE "RTC" STRING)
@@ -19,6 +16,11 @@ set_cache(STM32CUBEF2__DTTY_STM32_UART_ENABLE TRUE BOOL)
 include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_wrapper/config/stm32cubef2.cmake)
 include(${PROJECT_LIBRARY_DIR}/stm32cubef2_extension/config/stm32cubef2_extension.cmake)
+
+####
+
+set(INCLUDE__APP TRUE)
+set(APP__NAME "cli_tester")
 
 get_filename_component(_tmp_source_dir "${CMAKE_CURRENT_LIST_DIR}/${APP__NAME}" ABSOLUTE)
 string(TOLOWER ${UBINOS__BSP__BOARD_MODEL} _temp_board_model)

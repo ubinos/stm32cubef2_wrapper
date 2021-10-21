@@ -7,6 +7,7 @@
 # ubinos_config_info {"name_base": "stm32cubef2", "build_type": "cmake_ubinos"}
 
 include(${PROJECT_UBINOS_DIR}/config/ubinos_stm3221geval_baremetal.cmake)
+
 include(${CMAKE_CURRENT_LIST_DIR}/stm32cubef2.cmake)
 
 ####

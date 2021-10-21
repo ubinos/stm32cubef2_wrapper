@@ -1,3 +1,9 @@
+#
+# Copyright (c) 2021 Sung Ho Park and CSOS
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
 set(INCLUDE__STM32CUBEF2 TRUE)
 set(PROJECT_UBINOS_LIBRARIES ${PROJECT_UBINOS_LIBRARIES} stm32cubef2_wrapper)
 
