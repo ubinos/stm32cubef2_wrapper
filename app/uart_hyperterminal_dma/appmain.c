@@ -40,8 +40,6 @@ int appmain(int argc, char *argv[]) {
 static void rootfunc(void *arg) {
     int r;
 
-    HAL_Init();
-
     /* Configure LED1, LED2 and LED3 */
     BSP_LED_Init(LED1);
     BSP_LED_Init(LED2);

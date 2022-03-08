@@ -76,7 +76,7 @@ static void root_func(void *arg) {
         Error_Handler();
     }
 
-    printf("\n\r My UART Printf Example: retarget the C library printf function to the UART\n\r");
+    printf("\n\rUART Printf Example: retarget the C library printf function to the UART\n\r");
 
     printf("\n\n\r\n");
     printf("================================================================================\r\n");
