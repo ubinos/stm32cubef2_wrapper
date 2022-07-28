@@ -1,7 +1,7 @@
 #include <ubinos.h>
 
-#if (INCLUDE__APP__cli_tester == 1)
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+#if (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1)
 
 #include "main.h"
 #include "stm32f2xx_it.h"
@@ -13,9 +13,11 @@
  */
 void DTTY_STM32_UART_IRQHandler(void)
 {
+#if (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1)
     HAL_UART_IRQHandler(&DTTY_STM32_UART_HANDLE);
+#endif /* (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1) */
 }
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL) */
-#endif /* (INCLUDE__APP__cli_tester == 1) */
 

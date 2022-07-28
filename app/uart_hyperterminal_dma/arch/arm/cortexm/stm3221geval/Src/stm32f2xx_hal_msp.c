@@ -17,6 +17,11 @@
   ******************************************************************************
   */
 
+#include <ubinos.h>
+
+#if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+#if (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1)
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -184,5 +189,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
 /**
   * @}
   */
+
+#endif /* (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1) */
+#endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL) */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

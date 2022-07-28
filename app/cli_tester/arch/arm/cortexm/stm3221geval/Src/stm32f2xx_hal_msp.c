@@ -1,6 +1,7 @@
 #include <ubinos.h>
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+#if (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1)
 
 #include <ubinos/bsp/arch.h>
 
@@ -72,5 +73,6 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
     HAL_NVIC_DisableIRQ(DTTY_STM32_UART_IRQn);
 }
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL) */
 

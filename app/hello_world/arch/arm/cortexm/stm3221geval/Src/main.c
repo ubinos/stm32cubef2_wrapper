@@ -6,12 +6,14 @@
 
 #include <ubinos.h>
 
-#if (INCLUDE__APP__cli_tester == 1)
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+#if (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1)
 
 #include "main.h"
 
+#if (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1)
 UART_HandleTypeDef DTTY_STM32_UART_HANDLE;
+#endif /* (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1) */
 
 /**
  * @brief  Tx Transfer completed callback
@@ -22,10 +24,12 @@ UART_HandleTypeDef DTTY_STM32_UART_HANDLE;
  */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
+#if (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1)
     if (huart->Instance == DTTY_STM32_UART)
     {
         dtty_stm32_uart_tx_callback();
     }
+#endif /* (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1) */
 }
 
 /**
@@ -37,10 +41,12 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+#if (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1)
     if (huart->Instance == DTTY_STM32_UART)
     {
         dtty_stm32_uart_rx_callback();
     }
+#endif /* (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1) */
 }
 
 /**
@@ -52,12 +58,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
+#if (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1)
     if (huart->Instance == DTTY_STM32_UART)
     {
         dtty_stm32_uart_err_callback();
     }
+#endif /* (STM32CUBEF2__DTTY_STM32_UART_ENABLE == 1) */
 }
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL) */
-#endif /* (INCLUDE__APP__cli_tester == 1) */
 

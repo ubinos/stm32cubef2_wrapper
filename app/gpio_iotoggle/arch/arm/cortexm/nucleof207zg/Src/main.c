@@ -7,6 +7,7 @@
 #include <ubinos.h>
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
+#if (UBINOS__BSP__BOARD_VARIATION__NUCLEOF207ZG == 1)
 
 #include "main.h"
 
@@ -60,5 +61,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 }
 #endif
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__NUCLEOF207ZG == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG) */
 

@@ -22,6 +22,7 @@
 #include <ubinos.h>
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG)
+#if (UBINOS__BSP__BOARD_VARIATION__NUCLEOF207ZG == 1)
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -182,6 +183,7 @@ void USARTx_IRQHandler(void)
   * @}
   */
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__NUCLEOF207ZG == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__NUCLEOF207ZG) */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

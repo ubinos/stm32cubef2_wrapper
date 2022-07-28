@@ -7,6 +7,7 @@
 #include <ubinos.h>
 
 #if (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL)
+#if (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1)
 
 #include "main.h"
 
@@ -120,5 +121,6 @@ void assert_failed(uint8_t* file, uint32_t line)
 }
 #endif
 
+#endif /* (UBINOS__BSP__BOARD_VARIATION__STM3221GEVAL == 1) */
 #endif /* (UBINOS__BSP__BOARD_MODEL == UBINOS__BSP__BOARD_MODEL__STM3221GEVAL) */
 
